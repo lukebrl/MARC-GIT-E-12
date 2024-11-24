@@ -62,6 +62,7 @@ t_node findShortestPath(t_node root) {
         return root;
     }
 
+
     //save value of the cheapest node found
     t_node cheapest_node;
     int is_defined = 0;
