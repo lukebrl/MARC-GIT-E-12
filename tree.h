@@ -8,6 +8,7 @@
 #include "node.h"
 #include "loc.h"
 #include "map.h"
+#include <stdbool.h>
 
 /*typedef struct s_node{
     int cost;  //cout du déplacement
@@ -32,5 +33,7 @@ t_tree *createTree(t_node *node, int max_depth, t_localisation start_loc);
 void populateRoot(t_node *root, int nb_moves, t_move *moves_list, t_map map);
 void populateTree(t_tree *tree, int nb_moves, t_move *moves_list, t_map map);
 void displayRoot(t_node root);
+t_node findShortestPath(t_node root);
+void printNTree(t_node* x, bool* flag, int depth, bool isLast);
 
 #endif //UNTITLED1_TREE_H

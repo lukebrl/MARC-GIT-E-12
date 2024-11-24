@@ -3,20 +3,6 @@
 #include "loc.h"
 #include "moves.h"
 #include "stack.h"
-typedef struct s_node{
-    int cost;  //cout du déplacement
-    int totalcost; // utile si égalité de chemins
-    int depth;
-    t_localisation loc; // regroupe orientation et position
-    struct s_node * prev;
-    struct s_node ** sons;   //taille du tableau 9-depth
-    int nbsons;
-    t_move * tableau //avec les mvts restants; taille du tableau 9-depth
-
-}t_node;
-typedef struct s_tree{
-    t_node* root;
-}t_tree;
 
 typedef struct s_cell_move{
     t_move val;

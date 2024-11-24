@@ -20,14 +20,18 @@ int main() {
 
     t_map map = createMapFromFile("..\\maps\\test.map");
     displayMapCosts(map);
-    printf("%d\n", map.costs[0][4]);
     displayMap(map);
-    t_localisation start_loc = loc_init(1, 4, NORTH);
+    t_localisation start_loc = loc_init(2, 0, EAST);
     t_move moves_list[] = {F_10, T_RIGHT, F_30};
     t_node *root = createNode(0, 3);
     t_tree *tree = createTree(root, 3, start_loc);
     populateTree(tree, 3, moves_list, map);
-    displayRoot(*root);
+    //displayRoot(*root);
+    bool flag[] = {true, true, true};
+    printNTree(tree->root, flag, 0, false);
+
+    t_node shortest_path = findShortestPath(*tree->root);
+    displayNode(shortest_path);
 
 
     /*t_node *list_node[5] = {node1, node2, node3, node4, node5};

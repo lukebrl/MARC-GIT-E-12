@@ -56,10 +56,71 @@ void populateTree(t_tree *tree, int nb_moves, t_move *moves_list, t_map map) {
     populateRoot(tree->root, nb_moves, moves_list, map);
 }
 
+t_node findShortestPath(t_node root) {
+    //if no son
+    if (root.log_nbsons == 0) {
+        return root;
+    }
+
+    //save value of the cheapest node found
+    t_node cheapest_node;
+    int is_defined = 0;
+    //check for each sons
+    for (int i = 0; i < root.log_nbsons; i++) {
+        //printf("[%d] %d, sons: %d\n", i, root.sons[i]->cost, root.sons[i]->log_nbsons);
+        t_node min_node = findShortestPath(*root.sons[i]);
+
+        //if son is a leaf and not OOB
+        if (root.sons[i]->log_nbsons == 0 && root.sons[i]->cost <= 9999) {
+            //displayNode(min_node);
+            return *root.sons[i];
+        }
+
+        //compare all sons
+        if (!is_defined || (min_node.totalcost <= cheapest_node.totalcost && min_node.cost <= cheapest_node.cost)) {
+            cheapest_node = min_node;
+            is_defined = 1;
+        }
+        //displayNode(cheapest_node);
+    }
+    return cheapest_node;
+}
+
 
 void displayRoot(t_node root) {
     displayNode(root);
     for(int i=0; i < root.log_nbsons; i++) {
         displayRoot(*root.sons[i]);
     }
+}
+
+
+
+#include <stdbool.h>
+
+void printNTree(t_node* x, bool* flag, int depth, bool isLast) {
+    if (x == NULL)
+        return;
+
+    for (int i = 1; i < depth; ++i) {
+        if (flag[i] == true) {
+            printf("|   ");
+        } else {
+            printf("    ");
+        }
+    }
+
+    if (depth == 0)
+        printf("%d\n", x->cost);
+    else if (isLast) {
+        printf("+--- %d\n", x->cost);
+        flag[depth] = false;
+    } else {
+        printf("+--- %d\n", x->cost);
+    }
+
+    for (int it = 0; it < x->log_nbsons; ++it) {
+        printNTree(x->sons[it], flag, depth + 1, it == (x->log_nbsons - 1));
+    }
+    flag[depth] = true;
 }

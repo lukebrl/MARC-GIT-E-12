@@ -4,7 +4,7 @@
 #include "stack.h"
 #include "functions.h"
 #include <unistd.h>
-int main() {
+/*int main() {
     t_map map = createMapFromFile("/Users/macos/CLionProjects/MARC-master/maps/example1.map");
     int nbs[7]={22,15,7,7,21,21,7};
     int tab[9];
@@ -52,7 +52,7 @@ int main() {
 
 
 
-    /**
+    *//**
     printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
     for (int i = 0; i < map.y_max; i++)
     {
@@ -71,7 +71,7 @@ int main() {
         }
         printf("\n");
     }
-    displayMap(map);**/
+    displayMap(map);**//*
     return 0;
-}
+}*/
 
