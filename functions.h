@@ -38,3 +38,4 @@ void printTabMoves(int* tab, int size);
 int countstack(t_stack t, int val);
 int isEmptyStack(t_stack t);
 #endif //UNTITLED1_FUNCTIONS_H
+
