@@ -3,7 +3,9 @@
 //
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <assert.h>
+#include <time.h>
 #include "stack.h"
 
 /**
@@ -60,4 +62,27 @@ int top(t_stack stack)
     // the stack must not be empty
     assert(stack.nbElts > 0);
     return stack.values[stack.nbElts - 1];
+}
+void shufllestack(t_stack *p_stack){
+    srand(time(NULL));
+    int* tmp=malloc(sizeof(int)*p_stack->size);
+    for (int i=0;i<=p_stack->nbElts;i++){
+        tmp[i]=p_stack->values[i];
+    }
+    for (int i=p_stack->nbElts-1;i>0;i--){
+        int j=rand()%(i+1);
+        int caca=tmp[i];
+        tmp[i]=tmp[j];
+        tmp[j]=caca;
+    }
+    for (int i=0;i<=p_stack->nbElts;i++){
+        p_stack->values[i]=tmp[i];
+    }
+    free(tmp);
+}
+void printstack(t_stack t){
+    for (int i=0;i<t.size;i++){
+        printf("%d ",pop(&t));
+    }
+    printf("\n");
 }

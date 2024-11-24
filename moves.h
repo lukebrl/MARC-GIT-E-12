@@ -50,4 +50,7 @@ t_localisation move(t_localisation, t_move);
  */
 void updateLocalisation(t_localisation *, t_move);
 
+t_move *removeMoveAtIndex(t_move *moves_list, int nb_moves, int index);
+void deleteMovesList(t_move *moves_list);
+
 #endif //UNTITLED1_MOVES_H
