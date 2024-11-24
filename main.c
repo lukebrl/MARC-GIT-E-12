@@ -4,15 +4,8 @@
 #include "stack.h"
 #include "functions.h"
 #include <unistd.h>
-/*int main() {
-    t_map map;
-
-    #if defined(_WIN32) || defined(_WIN64)
-        map = createMapFromFile("..\\maps\\example1.map");
-    #else
-        map = createMapFromFile("../maps/example1.map");
-    #endif
-
+int main() {
+    t_map map = createMapFromFile("/Users/macos/CLionProjects/MARC-master/maps/example1.map");
     int nbs[7]={22,15,7,7,21,21,7};
     int tab[9];
     t_stack mooves= createStack(100);
@@ -44,13 +37,22 @@
         tab2[i] = popTest(&moves2);
     }
     printTabMovesTest(tab2,9);
+    t_ht_list list=createEmptyHt();
+    for (int i=0;i<9;i++){
+        addTailHt(&list,tab2[i]);
+    }
+    t_cell_move *tmp=list.head;
+    int a=0;
+    while(tmp){
+        printf("%s, ", getMoveAsString(tab2[a++]));
+        tmp=tmp->next;
+    }
 
 
 
 
 
-
-
+    /**
     printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
     for (int i = 0; i < map.y_max; i++)
     {
@@ -69,6 +71,7 @@
         }
         printf("\n");
     }
-    displayMap(map);
+    displayMap(map);**/
     return 0;
-}*/
+}
+

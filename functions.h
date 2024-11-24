@@ -11,12 +11,30 @@ typedef struct s_node{
     struct s_node * prev;
     struct s_node ** sons;   //taille du tableau 9-depth
     int nbsons;
-    t_move * tableau; //avec les mvts restants taille du tableau 9-depth
-} t_node;
+    t_move * tableau //avec les mvts restants; taille du tableau 9-depth
 
+}t_node;
 typedef struct s_tree{
     t_node* root;
-} t_tree;
+}t_tree;
+
+typedef struct s_cell_move{
+    t_move val;
+    struct s_cell_move * next;
+}t_cell_move;
+
+typedef struct s_ht_list{
+    t_cell_move * head;
+    t_cell_move * tail;
+}t_ht_list;
+void addTailHt(t_ht_list *list, t_move val);
+int isEmptyHtList(t_ht_list list);
+t_cell_move *createCell(t_move val);
+t_ht_list createEmptyHt();
+
+
+
+
 
 typedef struct s_test
 {

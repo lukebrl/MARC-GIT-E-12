@@ -90,3 +90,31 @@ void printTabMovesTest(t_move* tab, int size){
     }
     printf("\n");
 }
+void addTailHt(t_ht_list * list, t_move val){
+    t_cell_move * newc=createCell(val);
+    if(isEmptyHtList(*list)){
+        list->head=newc;
+        list->tail=newc;
+        return;
+    }
+    list->tail->next=newc;
+    list->tail=newc;
+}
+int isEmptyHtList(t_ht_list list){
+    if((list.head==NULL)&&(list.tail==NULL)){
+        return 1;
+    }
+    return 0;
+}
+t_cell_move *createCell(t_move val){
+    t_cell_move *newcell=malloc(sizeof(t_cell_move));
+    newcell->val=val;
+    newcell->next=NULL;
+    return newcell;
+}
+t_ht_list createEmptyHt(){
+    t_ht_list list;
+    list.head=NULL;
+    list.tail=NULL;
+    return list;
+}
