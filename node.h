@@ -6,6 +6,7 @@
 #define UNTITLED1_NODE_H
 
 #include "moves.h"
+#include "functions.h"
 
 typedef struct s_node {
     int cost;
@@ -15,12 +16,12 @@ typedef struct s_node {
     int log_nbsons;
     struct s_node **sons;
     struct s_node *parent;
-    t_move moves_list[5];
-    t_localisation actual_loc;
+    t_ht_list moves_done;
+    t_localisation loc;
 } t_node;
 
 t_node *createNode(int cost, int nbsons);
-void addSons(t_node *root, t_node *son);
+void addSons(t_node *root, t_node *son, t_move move);
 void displayNode(t_node node);
 void updateNodeLoc(t_node *node, t_localisation new_loc);
 

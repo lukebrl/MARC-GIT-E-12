@@ -36,7 +36,6 @@ void push(t_stack *p_stack, int value)
     assert(p_stack->nbElts < p_stack->size);
     p_stack->values[p_stack->nbElts] = value;
     p_stack->nbElts++;
-    return;
 }
 
 /**
@@ -63,7 +62,8 @@ int top(t_stack stack)
     assert(stack.nbElts > 0);
     return stack.values[stack.nbElts - 1];
 }
-void shufllestack(t_stack *p_stack){
+
+void shufflestack(t_stack *p_stack){
     srand(time(NULL));
     int* tmp=malloc(sizeof(int)*p_stack->size);
     for (int i=0;i<=p_stack->nbElts;i++){
@@ -80,8 +80,9 @@ void shufllestack(t_stack *p_stack){
     }
     free(tmp);
 }
-void printstack(t_stack t){
-    for (int i=0;i<t.size;i++){
+void printStack(t_stack t){
+    int tmp_nb_elts = t.nbElts;
+    for (int i = 0; i < tmp_nb_elts; i++){
         printf("%d ",pop(&t));
     }
     printf("\n");

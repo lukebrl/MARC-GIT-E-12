@@ -44,6 +44,6 @@ int pop(t_stack *);
  */
 int top(t_stack);
 
-void shufllestack(t_stack *);
-void printstack(t_stack);
+void shufflestack(t_stack *p_stack);
+void printStack(t_stack t);
 #endif //UNTITLED1_STACK_H

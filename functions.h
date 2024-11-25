@@ -13,13 +13,14 @@ typedef struct s_ht_list{
     t_cell_move * head;
     t_cell_move * tail;
 }t_ht_list;
+
+
 void addTailHt(t_ht_list *list, t_move val);
 int isEmptyHtList(t_ht_list list);
 t_cell_move *createCell(t_move val);
 t_ht_list createEmptyHt();
-
-
-
+void displayHt(t_ht_list list);
+void displayHtAsString(t_ht_list list);
 
 
 typedef struct s_test

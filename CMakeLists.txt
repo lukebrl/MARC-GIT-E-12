@@ -21,4 +21,6 @@ add_executable(untitled1 main.c
         node.h
         node.c
         test.c
-        functions.c)
+        functions.c
+        rover.h
+        rover.c)

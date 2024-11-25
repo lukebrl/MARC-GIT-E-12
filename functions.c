@@ -118,3 +118,12 @@ t_ht_list createEmptyHt(){
     list.tail=NULL;
     return list;
 }
+
+void displayHt(t_ht_list list) {
+    t_cell_move *tmp = list.head;
+    while(tmp){
+        printf("%s, ", getMoveAsString(tmp->val));
+        tmp=tmp->next;
+    }
+    printf("\n");
+}

@@ -19,7 +19,8 @@ t_node *createNode(int cost, int nbsons) {
     new_node->log_nbsons = 0;
     new_node->depth = 0;
     new_node->parent = NULL;
-    new_node->actual_loc = loc_init(0, 0, NORTH);
+    new_node->moves_done = createEmptyHt();
+    new_node->loc = loc_init(0, 0, NORTH);
 
     //set total cost of the way
     //if it has no parents -> totalcost = cost
@@ -51,14 +52,22 @@ t_node *createNode(int cost, int nbsons) {
 }
 
 
-void addSons(t_node *root, t_node *son) {
+void addSons(t_node *root, t_node *son, t_move move) {
     //check if you can still add son
     if (root->log_nbsons == root->phy_nbsons) {
         printf("You can't add more sons to this node.\n");
         return;
     }
 
-    //update total cost, parent and depth of the node
+    //update total cost, parent, moves and depth of the node
+    t_cell_move *tmp = root->moves_done.head;
+    while (tmp) {
+        addTailHt(&son->moves_done, tmp->val);
+        tmp = tmp->next;
+    }
+    addTailHt(&son->moves_done, move);
+    free(tmp);
+
     son->parent = root;
     son->totalcost += root->totalcost;
     son->depth = root->depth + 1;
@@ -69,14 +78,14 @@ void addSons(t_node *root, t_node *son) {
 }
 
 void updateNodeLoc(t_node *node, t_localisation new_loc) {
-    node->actual_loc.pos.x = new_loc.pos.x;
-    node->actual_loc.pos.y = new_loc.pos.y;
-    node->actual_loc.ori = new_loc.ori;
+    node->loc.pos.x = new_loc.pos.x;
+    node->loc.pos.y = new_loc.pos.y;
+    node->loc.ori = new_loc.ori;
 }
 
 
 void displayNode(t_node node) {
-    printf("[%d, %d] | ", node.actual_loc.pos.x, node.actual_loc.pos.y);
+    printf("[%d, %d] | ", node.loc.pos.x, node.loc.pos.y);
     printf("cost-> %d | total cost-> %d | ", node.cost, node.totalcost);
     if (node.parent != NULL) {
         printf("parent cost -> %d\n", node.parent->cost);
@@ -90,4 +99,6 @@ void displayNode(t_node node) {
         printf("%d, ", node.sons[i]->cost);
     }
     printf("\n");
+    displayHt(node.moves_done);
+    printf("\n\n");
 }
