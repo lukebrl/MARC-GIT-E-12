@@ -11,6 +11,7 @@ t_node *createNode(int cost, int nbsons) {
     t_node *new_node = malloc(sizeof(t_node));
     if (new_node == NULL) {
         printf("Error while allocating mem for node.\n");
+        return new_node;
     }
 
     new_node->cost = cost;

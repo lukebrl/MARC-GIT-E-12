@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-
 #include "map.h"
 #include "stack.h"
 #include "functions.h"
@@ -25,11 +24,14 @@ int main() {
     #if defined(_WIN32) || defined(_WIN64)
         map = createMapFromFile("..\\maps\\big.map");
     #else
-        map = createMapFromFile("../maps/test.map");
+        map = createMapFromFile("../maps/example1.map");
     #endif
 
     //create rover
-    t_localisation start_loc = loc_init(2, 35, NORTH);
+    srand(time(NULL));
+    int xdep=rand()%map.x_max,ydep=rand()%map.y_max;
+    printf("Initial Rover Loc: (x :%d,y :%d)\n\n",xdep,ydep);
+    t_localisation start_loc = loc_init(xdep, ydep, NORTH);
     t_rover *rover = createRover(start_loc);
 
     //create stack for all moves
@@ -79,6 +81,8 @@ int main() {
 
         clock_t end_phase = clock();
         double elapsed_time = ((double) (end_phase - start_phase)) / CLOCKS_PER_SEC;
+        printf("Available moves:\n");
+        printTabMovesTest(moves_list,9);
         printf("\n#####################################\n");
         printf("Phase number: %d\n", phase_number+1);
         printf("#####################################\n");
