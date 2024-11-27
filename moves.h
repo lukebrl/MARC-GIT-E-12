@@ -24,7 +24,7 @@ typedef enum e_move
     B_10, // Backward 10 m
     T_LEFT, // Turn left (+90°)
     T_RIGHT, // Turn right (-90°)
-    U_TURN
+    U_TURN,
 } t_move;
 
 /**
@@ -52,5 +52,7 @@ void updateLocalisation(t_localisation *, t_move);
 
 t_move *removeMoveAtIndex(t_move *moves_list, int nb_moves, int index);
 void deleteMovesList(t_move *moves_list);
+int isValidMoveERG(t_move move);
+t_move getMoveOnERG(t_move move);
 
 #endif //UNTITLED1_MOVES_H

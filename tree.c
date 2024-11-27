@@ -136,3 +136,10 @@ void printNTree(t_tree *tree) {
     }
     printNTreeNode(tree->root, flag, 0, false);
 }
+
+void deleteTree(t_tree *tree) {
+    deleteNode(tree->root);
+
+    free(tree);
+    tree = NULL;
+}

@@ -10,18 +10,6 @@
 #include "map.h"
 #include <stdbool.h>
 
-/*typedef struct s_node{
-    int cost;  //cout du déplacement
-    int totalcost; // utile si égalité de chemins
-    int depth;
-    //t_localisation loc; // regroupe orientation et position
-    //struct s_node * prev;
-    struct t_node ** sons;   //taille du tableau 9-depth
-    int nbsons;
-    int phys_sons;
-    //t_move * tableau; //avec les mvts restants taille du tableau 9-depth
-} t_node;*/
-
 typedef struct s_tree{
     t_node* root;
     int max_depth;
@@ -36,5 +24,6 @@ void displayRoot(t_node root);
 t_node findShortestPathNode(t_node root);
 t_node findShortestPathTree(t_tree tree);
 void printNTree(t_tree *tree);
+void deleteTree(t_tree *tree);
 
 #endif //UNTITLED1_TREE_H

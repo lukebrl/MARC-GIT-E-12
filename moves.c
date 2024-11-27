@@ -145,6 +145,10 @@ char *getMoveAsString(t_move move)
 
 t_localisation move(t_localisation loc, t_move move)
 {
+    //added this to do nothing if move is None
+    /*if (move == NONE) {
+        return loc;
+    }*/
     t_localisation new_loc=loc;
     if ((move >=T_LEFT) && (move <= U_TURN))
     {
@@ -207,4 +211,23 @@ t_move *removeMoveAtIndex(t_move *moves_list, int nb_moves, int index) {
 
 void deleteMovesList(t_move *moves_list) {
     free(moves_list);
+}
+
+int isValidMoveERG(t_move move) {
+    if (move == F_10 || move == T_RIGHT ||
+        move == T_LEFT | move == B_10) {
+        return 0;
+    }
+    return 1;
+}
+
+t_move getMoveOnERG(t_move move) {
+    switch (move) {
+        case F_20:
+            return F_10;
+        case F_30:
+            return F_20;
+        case U_TURN:
+            return T_RIGHT;
+    }
 }

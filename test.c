@@ -6,41 +6,59 @@
 #include "map.h"
 #include <stdio.h>
 #include <time.h>
+#include "functions.h"
 
-void displayMapCosts(t_map map) {
-    for(int i = 0; i < map.y_max; i++) {
-        for (int j = 0; j < map.x_max; j++) {
-            printf("%d ", map.costs[i][j]);
-        }
-        printf("\n");
-    }
-}
+#include "map.h"
+#include "stack.h"
+#include "functions.h"
+#include "rover.h"
+#include "tree.h"
+
+#define DEAD_COST 9999
+#define NB_MOVES 5
+#define MAX_DEPTH 3
+
 
 int test() {
-
-
-
-    t_map map = createMapFromFile("..\\maps\\big.map");
-    displayMapCosts(map);
-    displayMap(map);
-    t_localisation start_loc = loc_init(1, 4, NORTH);
-    t_move moves_list[] = {F_10, T_RIGHT, B_10, U_TURN, F_10};
-    t_tree *tree = createTree(3, 5, start_loc);
-    //timer
+    //set timer for the program
     clock_t start, end;
     double cpu_time_used;
     start = clock();
 
-    populateTree(tree, 5, moves_list, map);
-    printNTree(tree);
+    t_map map;
+    //create the map
+    #if defined(_WIN32) || defined(_WIN64)
+        map = createMapFromFile("..\\maps\\big.map");
+    #else
+        map = createMapFromFile("../maps/test.map");
+    #endif
 
-    t_node shortest_path = findShortestPathTree(*tree);
-    displayNode(shortest_path);
+    //create rover
+    t_localisation start_loc = loc_init(2, 35, NORTH);
+    t_rover *rover = createRover(start_loc);
 
-    end = clock();
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("\n****************************\n");
-    printf("* time taken: %.6f sec *\n", cpu_time_used);;
-    printf("****************************\n");
-    return 0;
+    //create stack for all moves
+    int nbs[7]={22,15,7,7,21,21,7};
+    t_stack moves= createStack(100);
+    for (int i=0;i<7;i++){
+        for (int j=0;j<nbs[i];j++){
+            push(&moves,i);
+        }
+    }
+
+    //create list of 9 moves
+    t_stack tmp_stack = moves;
+    shufflestack(&tmp_stack);
+    t_move moves_list[NB_MOVES];
+    for (int i = 0; i < NB_MOVES; i++) {
+        int next_move = pop(&tmp_stack);
+        moves_list[i] = next_move;
+    }
+
+    //create new tree and search
+    //the shortest path
+    t_tree *moves_tree = createTree(MAX_DEPTH, NB_MOVES, rover->loc);
+    populateTree(moves_tree, NB_MOVES, moves_list, map);
+    printNTree(moves_tree);
+    deleteTree(moves_tree);
 }

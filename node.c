@@ -11,6 +11,7 @@ t_node *createNode(int cost, int nbsons) {
     t_node *new_node = malloc(sizeof(t_node));
     if (new_node == NULL) {
         printf("Error while allocating mem for node.\n");
+        return new_node;
     }
 
     new_node->cost = cost;
@@ -21,15 +22,6 @@ t_node *createNode(int cost, int nbsons) {
     new_node->parent = NULL;
     new_node->moves_done = createEmptyHt();
     new_node->loc = loc_init(0, 0, NORTH);
-
-    //set total cost of the way
-    //if it has no parents -> totalcost = cost
-    /*if (parent != NULL) {
-        new_node->totalcost = cost + parent->totalcost;
-    }
-    else {
-        new_node->totalcost = cost;
-    }*/
 
     //if node doesn't have sons
     if (nbsons <= 0) {
@@ -101,4 +93,15 @@ void displayNode(t_node node) {
     printf("\n");
     displayHt(node.moves_done);
     printf("\n\n");
+}
+
+void deleteNode(t_node *node) {
+    for (int i = 0; i < node->log_nbsons; i++) {
+        deleteNode(node->sons[i]);
+    }
+
+    deleteHtList(&node->moves_done);
+    free(node->sons);
+    free(node);
+    node = NULL;
 }

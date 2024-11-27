@@ -24,5 +24,6 @@ t_node *createNode(int cost, int nbsons);
 void addSons(t_node *root, t_node *son, t_move move);
 void displayNode(t_node node);
 void updateNodeLoc(t_node *node, t_localisation new_loc);
+void deleteNode(t_node *node);
 
 #endif //UNTITLED1_NODE_H

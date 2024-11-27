@@ -49,7 +49,7 @@ t_test createStackTest(int size)
     t_test stack;
     stack.size = size;
     stack.nbElts = 0;
-    stack.values = (int *)malloc(size * sizeof(int));
+    stack.values = (t_move *)malloc(size * sizeof(t_move));
     return stack;
 }
 void pushTest(t_test *p_stack, int value)
@@ -90,6 +90,9 @@ void printTabMovesTest(t_move* tab, int size){
     }
     printf("\n");
 }
+
+
+
 void addTailHt(t_ht_list * list, t_move val){
     t_cell_move * newc=createCell(val);
     if(isEmptyHtList(*list)){
@@ -112,6 +115,12 @@ t_cell_move *createCell(t_move val){
     newcell->next=NULL;
     return newcell;
 }
+
+void deleteCell(t_cell_move *cell) {
+    free(cell);
+    cell = NULL;
+}
+
 t_ht_list createEmptyHt(){
     t_ht_list list;
     list.head=NULL;
@@ -126,4 +135,14 @@ void displayHt(t_ht_list list) {
         tmp=tmp->next;
     }
     printf("\n");
+}
+
+void deleteHtList(t_ht_list *list) {
+    t_cell_move *start = list->head;
+    while (start) {
+        t_cell_move* temp = start;
+        start = start -> next;
+        deleteCell(temp);
+    }
+    list = NULL;
 }
