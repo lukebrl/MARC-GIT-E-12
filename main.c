@@ -99,6 +99,7 @@ int main() {
 
         //update pos and add every
         //move from the path to the rover moves
+        t_soil start_soil = map.soils[rover->loc.pos.y][rover->loc.pos.x];
         updateRoverLoc(rover, shortest_path_node.loc);
         t_cell_move *tmp = shortest_path_node.moves_done.head;
         while (tmp) {
@@ -109,15 +110,17 @@ int main() {
         clock_t end_phase = clock();
         double elapsed_time = ((double) (end_phase - start_phase)) / CLOCKS_PER_SEC;
         printf("\n#####################################\n");
+        printf("Phase number: %d\n", phase_number+1);
+        printf("#####################################\n");
+        printf("Soils on start pos:\n%s\n", getSoilAsString(start_soil));
+        printf("#####################################\n");
         printf("Available moves:\n");
         printTabMovesTest(moves_list,9);
         printf("#####################################\n");
-        printf("Phase number: %d\n", phase_number+1);
-        printf("#####################################\n");
-        printf("Total Execution Time:\n%f sec\n", elapsed_time);
-        printf("#####################################\n");
         printf("Done Path: \n");
         displayHt(shortest_path_node.moves_done);
+        printf("#####################################\n");
+        printf("Total Execution Time:\n%f sec\n", elapsed_time);
         printf("#####################################\n");
         printf("Rover Loc:\n [%d, %d]\n", rover->loc.pos.x, rover->loc.pos.y);
         printf("#####################################\n\n");

@@ -301,3 +301,18 @@ void displayMap(t_map map)
     }
     return;
 }
+
+char *getSoilAsString(t_soil soil) {
+    switch (soil) {
+        case BASE_STATION:
+            return "BASE_STATION";
+        case PLAIN:
+            return "PLAIN";
+        case ERG:
+            return "ERG";
+        case REG:
+            return "REG";
+        case CREVASSE:
+            return "CREVASSE";
+    }
+}

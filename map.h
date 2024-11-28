@@ -55,4 +55,6 @@ t_map createMapFromFile(char *);
  */
 void displayMap(t_map);
 
+char *getSoilAsString(t_soil soil);
+
 #endif //UNTITLED1_MAP_H
